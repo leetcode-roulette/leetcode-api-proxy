@@ -1,0 +1,28 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root,
+html,
+body {
+	height: 100%;
+	margin: 0;
+
+	--white-color: #e8e8e8;
+	--light-grey-color: #c0c0c0;
+	--dark-grey-color: #2f2e36;
+	--black-color: #030406;
+	--darkest-blue-color: #262533;
+	--dark-blue-color: #254984;
+	--light-blue-color: #607aa5;
+	--dark-orange-color: #bb4625;
+	--light-orange-color: #e66c34;
+}
+
+#root {
+	height: 100vh;
+}
