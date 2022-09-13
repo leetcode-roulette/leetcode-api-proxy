@@ -1,2 +1,2 @@
-# leetcode-api-proxy
-API proxy for leetcode API
+# leetcode-roulette
+Main repository for leetcode-roulette
