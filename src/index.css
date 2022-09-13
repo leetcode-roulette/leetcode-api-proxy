@@ -13,14 +13,36 @@ body {
 	margin: 0;
 
 	--white-color: #e8e8e8;
+	--white-color-rgb: 232, 232, 232;
+	--white-color-1: rgba(var(--white-color-rgb), .9);
+	--white-color-2: rgba(var(--white-color-rgb), .7);
+	--white-color-3: rgba(var(--white-color-rgb), .5);
+	--white-color-4: rgba(var(--white-color-rgb), .2);
+	
 	--light-grey-color: #c0c0c0;
+	--light-grey-color-rgb: 192, 192, 192;
+
 	--dark-grey-color: #2f2e36;
+	--dark-grey-color-rgb: 47, 46, 54;
+
 	--black-color: #030406;
+	--black-color-rgb: 3, 4, 6;
+
 	--darkest-blue-color: #262533;
+	--darkest-blue-color-rgb: 38, 37, 51
+
 	--dark-blue-color: #254984;
+	--dark-blue-color-rgb: 37, 73, 132;
+
 	--light-blue-color: #607aa5;
+	--light-blue-color-rgb: 96, 122, 165;
+
 	--dark-orange-color: #bb4625;
+	--dark-orange-color-rgb: 187, 70, 37;
+
 	--light-orange-color: #e66c34;
+	--light-orange-color-rgb: 230, 108, 52;
+
 }
 
 #root {
