@@ -1,0 +1,44 @@
+.button.selected {
+	background-color: var(--white-color);
+	color: var(--black-color);
+}
+
+.btn:hover {
+	background-color: var(--white-color-4);
+}
+
+/* Button Styles */
+
+.btn {
+	font-family: "Heebo", sans-serif;
+	font-weight: 400;
+	border-radius: 48px;
+	padding: 0.25em 1em;
+	border-style: none;
+}
+
+/* Primary */
+
+.btn-primary-solid {
+	--background-color: var(--dark-orange-color);
+	background-color: var(--dark-orange-color);
+	color: var(--white-color);
+}
+
+/* Secondary */
+
+.btn-secondary-solid {
+	background-color: var(--dark-blue-color);
+	color: var(--white-color);
+}
+
+.btn-secondary-outline {
+	background-color: var(--dark-blue-color);
+	color: var(--white-color);
+}
+
+.btn.outline {
+	color: var(--background-color);
+	border: 1px solid var(--background-color);
+	background-color: transparent;
+}

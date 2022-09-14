@@ -3,9 +3,9 @@ import Button from "../Button/Button";
 
 const ButtonBar: FC = () => {
 	const buttons = [
-		<Button>photocopy</Button>,
-		<Button>pour</Button>,
-		<Button>railcar</Button>,
+		<Button style="btn-primary-solid">photocopy</Button>,
+		<Button style="btn-secondary-solid outline">pour</Button>,
+		<Button style="btn-secondary-outline">railcar</Button>,
 		<Button>mobile</Button>,
 		<Button>sheep</Button>,
 		<Button>cooperative</Button>,
@@ -29,8 +29,10 @@ const ButtonBar: FC = () => {
 			<div className="container">
 				<div className="col ">
 					<div className="d-flex flex-wrap justify-content-center">
-						{buttons.map((button) => (
-							<div className="mx-2 mb-4">{button}</div>
+						{buttons.map((button, i) => (
+							<div key={i} className="mx-2 mb-4">
+								{button}
+							</div>
 						))}
 					</div>
 				</div>
