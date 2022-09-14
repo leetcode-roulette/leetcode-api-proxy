@@ -72,6 +72,11 @@ body {
 
 	--light-orange-color: #e66c34;
 	--light-orange-color-rgb: 230, 108, 52;
+
+	--danger-color: #e6c534;
+	--warning-color: #e41c1c;
+	--success-color: #216d1f;
+	--dark-color: #2f2e36;
 }
 
 #root {
