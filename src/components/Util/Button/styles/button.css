@@ -3,10 +3,6 @@
 	color: var(--black-color);
 }
 
-.btn:hover {
-	background-color: var(--white-color-4);
-}
-
 /* Button Styles */
 
 .btn {
@@ -15,6 +11,10 @@
 	border-radius: 48px;
 	padding: 0.25em 1em;
 	border-style: none;
+}
+
+.btn:hover {
+	background-color: var(--white-color-4) !important;
 }
 
 /* Primary */

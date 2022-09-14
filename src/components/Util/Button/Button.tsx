@@ -10,7 +10,7 @@ interface ButtonOptions extends PropsWithChildren {
 }
 
 const STYLES = {
-	default: "btn-primary-solid",
+	default: "btn-white-outline",
 };
 
 const SIZES = {
