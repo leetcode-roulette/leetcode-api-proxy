@@ -4,7 +4,7 @@ import "./styles/button.css";
 interface ButtonOptions extends PropsWithChildren {
 	onClick?: () => void;
 	size?: "btn-sm" | "btn-md" | "btn-lrg";
-	style?: string;
+	styles?: string;
 	text?: string;
 	type?: "button" | "submit" | "reset" | undefined;
 }
@@ -19,9 +19,9 @@ const SIZES = {
 	large: "btn-lrg",
 };
 
-const Button: FC<ButtonOptions> = ({ children, onClick, size, style, text, type }) => {
+const Button: FC<ButtonOptions> = ({ children, onClick, size, styles, text, type }) => {
 	const btnSize = size ? size : SIZES["medium"];
-	const btnStyle = style ? style : STYLES["default"];
+	const btnStyle = styles ? styles : STYLES["default"];
 
 	const STYLE = [btnSize, btnStyle];
 

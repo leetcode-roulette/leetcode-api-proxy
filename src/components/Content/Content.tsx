@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Button } from "../Util";
 import { FilterGrid } from "../Util/FilterGrid";
 import "./styles/content.css";
@@ -23,7 +23,7 @@ const Content: FC = () => {
 					<FilterGrid></FilterGrid>
 					<div className="flex-row mt-5">
 						<Button>Search</Button>
-						<Button style="btn-primary-solid">Random</Button>
+						<Button styles="btn-primary-solid">Random</Button>
 					</div>
 				</div>
 			</div>
