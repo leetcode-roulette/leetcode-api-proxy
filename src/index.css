@@ -1,13 +1,92 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root,
+html,
+body {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+
+	/* Tints */
+
+	--tint-1: 0.9;
+	--tint-2: 0.7;
+	--tint-3: 0.5;
+	--tint-4: 0.1;
+
+	/* Colors */
+	--white-color: #e8e8e8;
+	--white-color-rgb: 232, 232, 232;
+	--white-color-1: rgba(var(--white-color-rgb), var(--tint-1));
+	--white-color-2: rgba(var(--white-color-rgb), var(--tint-2));
+	--white-color-3: rgba(var(--white-color-rgb), var(--tint-3));
+	--white-color-4: rgba(var(--white-color-rgb), var(--tint-4));
+
+	--light-grey-color: #c0c0c0;
+	--light-grey-color-rgb: 192, 192, 192;
+	--light-grey-color-1: rbga(var(--light-grey-color-rgb), var(--tint-1));
+	--light-grey-color-2: rbga(var(--light-grey-color-rgb), var(--tint-2));
+	--light-grey-color-3: rbga(var(--light-grey-color-rgb), var(--tint-3));
+	--light-grey-color-4: rbga(var(--light-grey-color-rgb), var(--tint-4));
+
+	--dark-grey-color: #2f2e36;
+	--dark-grey-color-rgb: 47, 46, 54;
+	--dark-grey-color-1: rbga(var(--dark-grey-color-rgb), var(--tint-1));
+	--dark-grey-color-2: rbga(var(--dark-grey-color-rgb), var(--tint-2));
+	--dark-grey-color-3: rbga(var(--dark-grey-color-rgb), var(--tint-3));
+	--dark-grey-color-4: rbga(var(--dark-grey-color-rgb), var(--tint-4));
+
+	--black-color: #030406;
+	--black-color-rgb: 3, 4, 6;
+	--black-color-1: rbga(var(--black-color-rgb), var(--tint-1));
+	--black-color-2: rbga(var(--black-color-rgb), var(--tint-2));
+	--black-color-3: rbga(var(--black-color-rgb), var(--tint-3));
+	--black-color-4: rbga(var(--black-color-rgb), var(--tint-4));
+
+	--darkest-blue-color: #262533;
+	--darkest-blue-color-rgb: 38, 37, 51;
+	--darkest-blue-color-1: rbga(var(--darkest-blue-color), var(--tint-1));
+	--darkest-blue-color-2: rbga(var(--darkest-blue-color), var(--tint-2));
+	--darkest-blue-color-3: rbga(var(--darkest-blue-color), var(--tint-3));
+	--darkest-blue-color-4: rbga(var(--darkest-blue-color), var(--tint-4));
+
+	--dark-blue-color: #254984;
+	--dark-blue-color-rgb: 37, 73, 132;
+	--dark-blue-color-1: rbga(var(--dark-blue-color), var(--tint-1));
+	--dark-blue-color-2: rbga(var(--dark-blue-color), var(--tint-2));
+	--dark-blue-color-3: rbga(var(--dark-blue-color), var(--tint-3));
+	--dark-blue-color-4: rbga(var(--dark-blue-color), var(--tint-4));
+
+	--light-blue-color: #607aa5;
+	--light-blue-color-rgb: 96, 122, 165;
+
+	--dark-orange-color: #bb4625;
+	--dark-orange-color-rgb: 187, 70, 37;
+	--dark-orange-color-1: rbga(var(--dark-orange-color), var(--tint-1));
+	--dark-orange-color-2: rbga(var(--dark-orange-color), var(--tint-2));
+	--dark-orange-color-3: rbga(var(--dark-orange-color), var(--tint-3));
+	--dark-orange-color-4: rbga(var(--dark-orange-color), var(--tint-4));
+
+	--light-orange-color: #e66c34;
+	--light-orange-color-rgb: 230, 108, 52;
+
+	--danger-color: #e6c534;
+	--warning-color: #e41c1c;
+	--success-color: #216d1f;
+	--dark-color: #2f2e36;
+}
+
+#root {
+	display: flex;
+}
+
+body {
+	background-color: var(--darkest-blue-color);
 }

@@ -1,0 +1,8 @@
+.content {
+	height: 100%;
+	color: var(--white-color);
+}
+
+p {
+	font-size: 1em;
+}
