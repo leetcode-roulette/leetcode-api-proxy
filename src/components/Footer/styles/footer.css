@@ -1,0 +1,8 @@
+.footer {
+	width: 100%;
+	background-color: var(--darkest-blue-color);
+}
+
+svg {
+	width: inherit;
+}

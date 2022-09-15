@@ -1,0 +1,20 @@
+.navbar {
+	background-color: #262533;
+	font-family: "Noto Sans", sans-serif;
+	color: #c0c0c0;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+	color: inherit;
+}
+
+.navbar a {
+	background: transparent;
+}
+.navbar a:hover {
+	color: #c0c0c0;
+	filter: brightness(0.85);
+}
