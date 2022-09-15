@@ -19,8 +19,12 @@
 .toggled {
 	background-color: var(--white-color);
 	color: var(--black-color);
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .toggled:hover {
-	background-color: var(--white-color-2);
+	background-color: var(--white-color);
+	border-color: var(--dark-orange-color) !important;
+	box-shadow: none;
+	border-style: dashed;
 }

@@ -19,7 +19,7 @@ const FilterGrid: FC<PropsWithChildren> = () => {
 	));
 
 	return (
-		<div className="container">
+		<div className="container-fluid">
 			<div className="col">
 				<div className="d-flex flex-wrap justify-content-center">
 					{FILTER_BUTTONS.map((filter, i) => (

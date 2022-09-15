@@ -31,24 +31,24 @@ body {
 
 	--light-grey-color: #c0c0c0;
 	--light-grey-color-rgb: 192, 192, 192;
-	--light-grey-color-1: rbga(var(--light-grey-color), var(--tint-1));
-	--light-grey-color-2: rbga(var(--light-grey-color), var(--tint-2));
-	--light-grey-color-3: rbga(var(--light-grey-color), var(--tint-3));
-	--light-grey-color-4: rbga(var(--light-grey-color), var(--tint-4));
+	--light-grey-color-1: rbga(var(--light-grey-color-rgb), var(--tint-1));
+	--light-grey-color-2: rbga(var(--light-grey-color-rgb), var(--tint-2));
+	--light-grey-color-3: rbga(var(--light-grey-color-rgb), var(--tint-3));
+	--light-grey-color-4: rbga(var(--light-grey-color-rgb), var(--tint-4));
 
 	--dark-grey-color: #2f2e36;
 	--dark-grey-color-rgb: 47, 46, 54;
-	--dark-grey-color-1: rbga(var(--dark-grey-color), var(--tint-1));
-	--dark-grey-color-2: rbga(var(--dark-grey-color), var(--tint-2));
-	--dark-grey-color-3: rbga(var(--dark-grey-color), var(--tint-3));
-	--dark-grey-color-4: rbga(var(--dark-grey-color), var(--tint-4));
+	--dark-grey-color-1: rbga(var(--dark-grey-color-rgb), var(--tint-1));
+	--dark-grey-color-2: rbga(var(--dark-grey-color-rgb), var(--tint-2));
+	--dark-grey-color-3: rbga(var(--dark-grey-color-rgb), var(--tint-3));
+	--dark-grey-color-4: rbga(var(--dark-grey-color-rgb), var(--tint-4));
 
 	--black-color: #030406;
 	--black-color-rgb: 3, 4, 6;
-	--black-color-1: rbga(var(--black-color), var(--tint-1));
-	--black-color-2: rbga(var(--black-color), var(--tint-2));
-	--black-color-3: rbga(var(--black-color), var(--tint-3));
-	--black-color-4: rbga(var(--black-color), var(--tint-4));
+	--black-color-1: rbga(var(--black-color-rgb), var(--tint-1));
+	--black-color-2: rbga(var(--black-color-rgb), var(--tint-2));
+	--black-color-3: rbga(var(--black-color-rgb), var(--tint-3));
+	--black-color-4: rbga(var(--black-color-rgb), var(--tint-4));
 
 	--darkest-blue-color: #262533;
 	--darkest-blue-color-rgb: 38, 37, 51;
@@ -84,6 +84,9 @@ body {
 }
 
 #root {
-	height: inherit;
 	display: flex;
+}
+
+body {
+	background-color: var(--darkest-blue-color);
 }
