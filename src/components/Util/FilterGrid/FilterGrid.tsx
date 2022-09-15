@@ -9,7 +9,7 @@ const FilterGrid: FC<PropsWithChildren> = () => {
 
 	const FILTER_BUTTONS = DEFAULT_FILTERS.map((filter: Filter) => (
 		<FilterToggle
-			style="toggle toggle-white-outline"
+			styles="toggle toggle-white-outline"
 			filter={filter}
 			toggled={filter.toggled}
 			onClick={() => filterToggleHandler(filter.id)}

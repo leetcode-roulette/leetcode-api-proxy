@@ -8,11 +8,11 @@ interface FilterToggleProps extends PropsWithChildren {
 	onClick?: () => void;
 	text?: string;
 	toggled?: boolean;
-	style?: string;
+	styles?: string;
 	type?: "button" | "submit" | "reset" | undefined;
 }
 
-const FilterToggle: FC<FilterToggleProps> = ({ children, onClick, style }) => {
+const FilterToggle: FC<FilterToggleProps> = ({ children, onClick, styles }) => {
 	const [toggled, setToggled] = useState(false);
 
 	useEffect(() => {
@@ -26,7 +26,7 @@ const FilterToggle: FC<FilterToggleProps> = ({ children, onClick, style }) => {
 	}
 	return (
 		<>
-			<button className={`${style} ${toggled ? `toggled` : ""}`} onClick={handleFilterToggle}>
+			<button className={`${styles} ${toggled ? `toggled` : ""}`} onClick={handleFilterToggle}>
 				{children}
 			</button>
 		</>
