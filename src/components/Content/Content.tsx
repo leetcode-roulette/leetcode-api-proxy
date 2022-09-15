@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import { Button, ButtonBar } from "../Util";
+import { Button } from "../Util";
+import { FilterGrid } from "../Util/FilterGrid";
 import "./styles/content.css";
 
 const Content: FC = () => {
@@ -19,10 +20,10 @@ const Content: FC = () => {
 							officia deserunt mollit anim id est laborum."
 						</p>
 					</div>
-					<ButtonBar></ButtonBar>
+					<FilterGrid></FilterGrid>
 					<div className="flex-row mt-5">
 						<Button>Search</Button>
-						<Button>Random</Button>
+						<Button style="btn-primary-solid">Random</Button>
 					</div>
 				</div>
 			</div>

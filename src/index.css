@@ -69,6 +69,10 @@ body {
 
 	--dark-orange-color: #bb4625;
 	--dark-orange-color-rgb: 187, 70, 37;
+	--dark-orange-color-1: rbga(var(--dark-orange-color), var(--tint-1));
+	--dark-orange-color-2: rbga(var(--dark-orange-color), var(--tint-2));
+	--dark-orange-color-3: rbga(var(--dark-orange-color), var(--tint-3));
+	--dark-orange-color-4: rbga(var(--dark-orange-color), var(--tint-4));
 
 	--light-orange-color: #e66c34;
 	--light-orange-color-rgb: 230, 108, 52;
