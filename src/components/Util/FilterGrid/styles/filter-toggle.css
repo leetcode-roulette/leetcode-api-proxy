@@ -24,7 +24,6 @@
 
 .toggled:hover {
 	background-color: var(--white-color);
-	border-color: var(--dark-orange-color) !important;
+	border-color: var(--light-grey-color) !important;
 	box-shadow: none;
-	border-style: dashed;
 }

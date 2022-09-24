@@ -6,18 +6,16 @@ import "./styles/content.css";
 const Content: FC = () => {
 	return (
 		<div className="content px-4">
-			<div className="mx-auto pt-5 text-center">
+			<div className="mx-auto pt-4 text-center">
 				<div className="col align-self-center">
 					<h5 className="logo py-4 fw-normal">
 						Welcome to LeetCode<span>Roulette</span>
 					</h5>
 					<div className="row justify-content-center">
-						<p className="w-50">
-							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-							et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-							aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-							dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-							officia deserunt mollit anim id est laborum."
+						<p className="w-75">
+							Leetcode Roulette is a service that allows users to get a random question from <a className="leetcode" href="https://leetcode.com">leetcode.com</a>, 
+							similar to a roulette game. Users are able to apply filters and 
+							search to find questions. Try it out below!
 						</p>
 					</div>
 					<FilterGrid></FilterGrid>

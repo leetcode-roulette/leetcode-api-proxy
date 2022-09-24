@@ -4,6 +4,29 @@ export interface Filter {
 	toggled?: boolean;
 }
 
+export const DEFAULT_ROW_FILTERS: Filter[] = [
+	{
+		id: 0,
+		text: "Easy",
+		toggled: true
+	},
+	{
+		id: 1,
+		text: "Medium",
+		toggled: true
+	},
+	{
+		id: 2,
+		text: "Hard",
+		toggled: true
+	},
+	{
+		id: 3,
+		text: "Premium",
+		toggled: false
+	}
+]
+
 export const DEFAULT_FILTERS: Filter[] = [
 	{
 		id: 0,
@@ -47,6 +70,21 @@ export const DEFAULT_FILTERS: Filter[] = [
 	},
 	{
 		id: 8,
+		text: "Heaps",
+		toggled: false,
+	},
+	{
+		id: 9,
+		text: "Greedy",
+		toggled: false,
+	},
+	{
+		id: 10,
+		text: "Binary Search",
+		toggled: false,
+	},
+	{
+		id: 11,
 		text: "Heaps",
 		toggled: false,
 	},
