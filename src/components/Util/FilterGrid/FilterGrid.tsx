@@ -1,13 +1,19 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren, useEffect, useState } from "react";
 import FilterToggle from "./FilterToggle";
-import { Filter, DEFAULT_FILTERS } from "./Filter";
+import { Filter, getTags } from "./Filter";
 
 const FilterGrid: FC<PropsWithChildren> = () => {
 	function filterToggleHandler(filterId: number): void {
 		console.log(`Filter:${filterId} has been toggled!!`);
 	}
 
-	const FILTER_BUTTONS = DEFAULT_FILTERS.map((filter: Filter) => (
+	const [tags, setTags] = useState<Filter[]>([]);
+	useEffect(() => {
+		getTags().then(data => {
+			setTags(data);
+		});
+	}, []);
+	const FILTER_BUTTONS = tags.map((filter: Filter) => (
 		<FilterToggle
 			styles="toggle toggle-white-outline"
 			filter={filter}
