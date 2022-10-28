@@ -1,4 +1,4 @@
-import LeetcodeRouletteAPI from "leetcode-roulette-api";
+import LeetcodeRouletteAPI, { Tag } from "leetcode-roulette-api";
 
-export const api: LeetcodeRouletteAPI = new LeetcodeRouletteAPI(process.env.API_HOSTNAME);
-
+export { type Tag }
+export const api: LeetcodeRouletteAPI = new LeetcodeRouletteAPI("http://localhost:3001");

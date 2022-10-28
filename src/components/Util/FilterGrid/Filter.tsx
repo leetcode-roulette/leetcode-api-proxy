@@ -4,8 +4,13 @@ import { api } from "../../../api";
 export interface Filter {
 	id: number;
 	text: string;
-	slug: string;
+	data: string;
+	type: string;
 	toggled?: boolean;
+}
+
+export function filterToggleHandler(filter: Filter): void {
+	
 }
 
 export const getTags = (async () : Promise<Filter[]> => {
@@ -23,7 +28,8 @@ export const getTags = (async () : Promise<Filter[]> => {
 		filters.push({
 			id: i,
 			text: tag.name,
-			slug: tag.tag_slug,
+			data: tag.tag_slug,
+			type: "tags",
 			toggled: false
 		});
 	});

@@ -1,14 +1,15 @@
 import { FC } from "react";
 import { Button } from "../Util";
 import { FilterGrid } from "../Util/FilterGrid";
+import FilterBar from "../Util/FilterGrid/FilterBar";
 import "./styles/content.css";
 
 const Content: FC = () => {
 	return (
 		<div className="content px-4">
-			<div className="mx-auto pt-3 text-center">
+			<div className="mx-auto pt-2 text-center">
 				<div className="col align-self-center">
-					<h5 className="logo py-4 fw-normal">
+					<h5 className="logo py-2 fw-normal">
 						Welcome to LeetCode<span>Roulette</span>
 					</h5>
 					<div className="row justify-content-center">
@@ -18,6 +19,7 @@ const Content: FC = () => {
 							search to find questions. Try it out below!
 						</p>
 					</div>
+					<FilterBar></FilterBar>
 					<FilterGrid></FilterGrid>
 					<div className="my-5">
 						<Button size="btn-lrg" styles="btn-primary-solid">Random</Button>
