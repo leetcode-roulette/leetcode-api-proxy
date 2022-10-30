@@ -10,20 +10,47 @@
 	background-color: var(--white-color-4);
 }
 
-.toggle-white-outline {
+.toggle-outline {
 	background-color: transparent;
-	color: var(--white-color);
 	border: 1px solid currentColor;
 }
 
-.toggled {
-	background-color: var(--white-color);
+.toggle.show {
+	--toggle-color: var(--dark-blue-color);
+	background-color: var(--toggle-color);
+	color: var(--white-color);
+}
+
+.toggle-outline.white {
+	--toggle-color: var(--white-color);
+	color: var(--toggle-color);
+}
+
+.toggle-outline.easy {
+	--toggle-color: var(--easy-color);
+	color: var(--toggle-color);
+}
+.toggle-outline.medium {
+	--toggle-color: var(--medium-color);
+	color: var(--medium-color);
+}
+
+.toggle-outline.hard {
+	--toggle-color: var(--hard-color);
+	color: var(--hard-color);
+}
+.toggle-outline.premium {
+	--toggle-color: var(--premium-color);
+	color: var(--premium-color);
+}
+
+.toggle-outline.toggled {
+	background-color: var(--toggle-color);
 	color: var(--black-color);
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .toggled:hover {
-	background-color: var(--white-color);
 	border-color: var(--light-grey-color) !important;
 	box-shadow: none;
 }

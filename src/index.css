@@ -80,6 +80,11 @@ body {
 	--warning-color: #e41c1c;
 	--success-color: #216d1f;
 	--dark-color: #2f2e36;
+
+	--easy-color: #8ac926;
+	--medium-color: #1982c4;
+	--hard-color: #ff595e;
+	--premium-color: #ffca3a;
 }
 
 #root {

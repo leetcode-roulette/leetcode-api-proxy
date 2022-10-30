@@ -27,7 +27,7 @@ const FilterBar: FC<FilterBarProps> = ({ updateFilters }: FilterBarProps) => {
 
 	const Premium = (
 		<FilterToggle
-			styles="toggle toggle-white-outline"
+			styles="toggle toggle-outline premium"
 			filter={premium}
 			toggled={premium.toggled}
 			onClick={() => filterToggleHandler(updateFilters, premium)}
@@ -39,7 +39,7 @@ const FilterBar: FC<FilterBarProps> = ({ updateFilters }: FilterBarProps) => {
 	const Difficulties = difficulties.map((difficulty) => {
 		return (
 			<FilterToggle
-				styles="toggle toggle-white-outline"
+				styles={`toggle toggle-outline ${difficulty.text.toLowerCase()}`}
 				filter={difficulty}
 				toggled={difficulty.toggled}
 				onClick={() => filterToggleHandler(updateFilters, difficulty)}

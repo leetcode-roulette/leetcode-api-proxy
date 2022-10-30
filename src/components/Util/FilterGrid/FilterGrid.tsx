@@ -12,7 +12,7 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 	const [numberOfItems, setNumberOfItems] = useState<number>(20);
 	const FILTER_BUTTONS = tags.map((filter: Filter) => (
 		<FilterToggle
-			styles="toggle toggle-white-outline"
+			styles="toggle toggle-outline white"
 			filter={filter}
 			toggled={filter.toggled}
 			onClick={() => filterToggleHandler(updateFilters, filter)}
@@ -42,7 +42,7 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 							)
 					)}
 					<div className="mx-2 my-2">
-						<button className="toggle toggle-white-outline" onClick={() => setShowMore(!showMore)}>
+						<button className="toggle show" onClick={() => setShowMore(!showMore)}>
 							Show {(showMore && "less") || "more"}
 						</button>
 					</div>
