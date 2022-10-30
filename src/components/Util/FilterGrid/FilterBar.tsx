@@ -19,7 +19,7 @@ const FilterBar: FC<FilterBarProps> = ({ updateFilters }: FilterBarProps) => {
     return {
       id,
       text: difficulty,
-      data: id.toString(),
+      data: (id + 1).toString(),
       type: "difficulty",
       toggled: false
     }

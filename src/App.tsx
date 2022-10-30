@@ -15,7 +15,7 @@ class App extends Component {
 	};
 
 	async componentDidMount() {
-		document.title = "Welcome to Leetcode Roulette | Apply filters and get started finding problems!";
+		document.title = "Welcome to Leetcode Roulette | Apply Filters & Get Started Finding Problems!";
 		this.state.tags = await getTags();
 		this.setState(state => ({
 			...state,

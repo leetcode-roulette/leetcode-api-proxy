@@ -1,4 +1,6 @@
+import { Problem } from "leetcode-roulette-api";
 import React, { Component } from "react";
+import { api } from "../../api";
 import { Button } from "../Util";
 import { FilterGrid } from "../Util/FilterGrid";
 import { Filter } from "../Util/FilterGrid/Filter";
@@ -28,6 +30,7 @@ class Content extends Component<contentProps, contentState> {
 		this.updateTags = this.updateTags.bind(this);
 		this.updatePremiumState = this.updatePremiumState.bind(this);
 		this.updateDifficulty = this.updateDifficulty.bind(this);
+		this.onClick = this.onClick.bind(this);
 	}
 
 	updateTags(slug: string): void {
@@ -67,6 +70,22 @@ class Content extends Component<contentProps, contentState> {
 		}
 	}
 
+	async onClick(): Promise<void> {
+		let problems: Array<Problem>;
+
+		try {
+			problems = await api.getProblems({
+				tags: Array.from(this.state.tags),
+				difficulty: Array.from(this.state.difficulty),
+				premium: this.state.premium !== undefined ? !this.state.premium : false
+			});
+
+			console.log(problems);
+		} catch(e) {
+			console.log("Error fetching problems: " + e);
+		}
+	}
+
 	render() {
 		return (
 			<div className="content px-4">
@@ -77,7 +96,7 @@ class Content extends Component<contentProps, contentState> {
 						</h5>
 						<div className="row justify-content-center">
 							<p className="w-75 pb-1">
-								Leetcode Roulette is a service that allows users to get a random question from <a className="leetcode" href="https://leetcode.com">leetcode.com</a>, 
+								Leetcode Roulette is a service that allows users to get a random question from <a rel="noreferrer" target="_blank" className="leetcode" href="https://leetcode.com">leetcode.com</a>, 
 								similar to a roulette game. Users are able to apply filters and 
 								search to find questions. Try it out below!
 							</p>
@@ -85,7 +104,7 @@ class Content extends Component<contentProps, contentState> {
 						<FilterBar updateFilters={this.updateFilters}></FilterBar>
 						<FilterGrid tags={this.props.tags} updateFilters={this.updateFilters}></FilterGrid>
 						<div className="my-5">
-							<Button size="btn-lrg" styles="btn-primary-solid">Random</Button>
+							<Button onClick={this.onClick} size="btn-lrg" styles="btn-primary-solid">Random</Button>
 						</div>
 					</div>
 				</div>
