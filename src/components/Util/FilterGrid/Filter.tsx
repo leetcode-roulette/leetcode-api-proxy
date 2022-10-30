@@ -1,26 +1,37 @@
+import { Tag } from "leetcode-roulette-api";
+import { api } from "../../../api";
+
 export interface Filter {
 	id: number;
 	text: string;
-	toggled?: boolean;
+	data: string;
+	type: string;
+	toggled: boolean;
 }
 
-export const DEFAULT_FILTERS = (() : Filter[] => {
-	const filterTextArray : string[] = [
-		"Array", "String", "Hash Table", 
-		"Dynamic Programming", "Sorting", 
-		"Math", "Greedy", "Binary Search",
-		"Heaps"
-	];
+export function filterToggleHandler(callback: (filter: Filter) => void, filter: Filter): void {
+	callback(filter);
+}
 
+export const getTags = (async () : Promise<Filter[]> => {
 	const filters : Filter[] = [];
 
-	for (let i = 0; i < 71; i++) {
-		filters[i] = {
-			id: i,
-			text: filterTextArray[Math.floor(Math.random() * filterTextArray.length)],
-			toggled: false
-		};
-	}
+	try {
+		const tags: Tag[] = await api.getTags();
 
-	return filters;
-})();
+		tags.forEach((tag, i) => {
+			filters.push({
+				id: i,
+				text: tag.name,
+				data: tag.tag_slug,
+				type: "tags",
+				toggled: false
+			});
+		});
+
+		return filters;
+	} catch(e) {
+		console.log("Exception caught fetching tags: " + e);
+		return [];
+	}
+});

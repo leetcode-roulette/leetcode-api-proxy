@@ -1,18 +1,19 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC } from "react";
 import FilterToggle from "./FilterToggle";
-import { Filter, DEFAULT_FILTERS } from "./Filter";
+import { Filter, filterToggleHandler } from "./Filter";
 
-const FilterGrid: FC<PropsWithChildren> = () => {
-	function filterToggleHandler(filterId: number): void {
-		console.log(`Filter:${filterId} has been toggled!!`);
-	}
+interface FilterGridProps {
+  updateFilters: (filter: Filter) => void;
+	tags: Array<Filter>;
+}
 
-	const FILTER_BUTTONS = DEFAULT_FILTERS.map((filter: Filter) => (
+const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProps) => {
+	const FILTER_BUTTONS = tags.map((filter: Filter) => (
 		<FilterToggle
 			styles="toggle toggle-white-outline"
 			filter={filter}
 			toggled={filter.toggled}
-			onClick={() => filterToggleHandler(filter.id)}
+			onClick={() => filterToggleHandler(updateFilters, filter)}
 		>
 			{filter.text}
 		</FilterToggle>
@@ -23,7 +24,7 @@ const FilterGrid: FC<PropsWithChildren> = () => {
 			<div className="col">
 				<div className="d-flex flex-wrap justify-content-center">
 					{FILTER_BUTTONS.map((filter, i) => (
-						<div key={i} className="mx-2 mb-4">
+						<div key={i} className="mx-2 mb-3">
 							{filter}
 						</div>
 					))}
