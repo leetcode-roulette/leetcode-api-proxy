@@ -12,8 +12,8 @@ interface FilterToggleProps extends PropsWithChildren {
 	type?: "button" | "submit" | "reset" | undefined;
 }
 
-const FilterToggle: FC<FilterToggleProps> = ({ children, onClick, styles }) => {
-	const [toggled, setToggled] = useState(false);
+const FilterToggle: FC<FilterToggleProps> = ({ filter, children, onClick, styles }: FilterToggleProps) => {
+	const [toggled, setToggled] = useState(filter.toggled);
 
 	useEffect(() => {
 		console.log(toggled);
@@ -22,6 +22,7 @@ const FilterToggle: FC<FilterToggleProps> = ({ children, onClick, styles }) => {
 	function handleFilterToggle(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
 		setToggled(!toggled);
+		filter.toggled = toggled;
 		onClick?.();
 	}
 	return (

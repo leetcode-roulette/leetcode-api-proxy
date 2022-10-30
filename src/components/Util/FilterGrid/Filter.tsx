@@ -6,33 +6,32 @@ export interface Filter {
 	text: string;
 	data: string;
 	type: string;
-	toggled?: boolean;
+	toggled: boolean;
 }
 
-export function filterToggleHandler(filter: Filter): void {
-	
+export function filterToggleHandler(callback: (filter: Filter) => void, filter: Filter): void {
+	callback(filter);
 }
 
 export const getTags = (async () : Promise<Filter[]> => {
-	let tags: Tag[] = [];
-
-	try {
-		tags = await api.getTags();
-	} catch(e) {
-		console.log("Exception caught fetching tags: " + e);
-	}
-
 	const filters : Filter[] = [];
 
-	tags.forEach((tag, i) => {
-		filters.push({
-			id: i,
-			text: tag.name,
-			data: tag.tag_slug,
-			type: "tags",
-			toggled: false
-		});
-	});
+	try {
+		const tags: Tag[] = await api.getTags();
 
-	return filters;
+		tags.forEach((tag, i) => {
+			filters.push({
+				id: i,
+				text: tag.name,
+				data: tag.tag_slug,
+				type: "tags",
+				toggled: false
+			});
+		});
+
+		return filters;
+	} catch(e) {
+		console.log("Exception caught fetching tags: " + e);
+		return [];
+	}
 });

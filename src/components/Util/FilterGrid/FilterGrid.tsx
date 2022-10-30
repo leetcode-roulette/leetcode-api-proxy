@@ -1,20 +1,19 @@
-import React, { FC, PropsWithChildren, useEffect, useState } from "react";
+import React, { FC } from "react";
 import FilterToggle from "./FilterToggle";
-import { Filter, getTags, filterToggleHandler } from "./Filter";
+import { Filter, filterToggleHandler } from "./Filter";
 
-const FilterGrid: FC<PropsWithChildren> = () => {
-	const [tags, setTags] = useState<Filter[]>([]);
-	useEffect(() => {
-		getTags().then(data => {
-			setTags(data);
-		});
-	}, []);
+interface FilterGridProps {
+  updateFilters: (filter: Filter) => void;
+	tags: Array<Filter>;
+}
+
+const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProps) => {
 	const FILTER_BUTTONS = tags.map((filter: Filter) => (
 		<FilterToggle
 			styles="toggle toggle-white-outline"
 			filter={filter}
 			toggled={filter.toggled}
-			onClick={() => filterToggleHandler(filter)}
+			onClick={() => filterToggleHandler(updateFilters, filter)}
 		>
 			{filter.text}
 		</FilterToggle>

@@ -1,14 +1,18 @@
-import React, { FC, PropsWithChildren, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { Filter, filterToggleHandler } from "./Filter";
 import FilterToggle from "./FilterToggle";
 
-const FilterBar: FC<PropsWithChildren> = () => {
+interface FilterBarProps {
+  updateFilters: (filter: Filter) => void;
+}
+
+const FilterBar: FC<FilterBarProps> = ({ updateFilters }: FilterBarProps) => {
   const premium: Filter = {
     id: 1,
     text: "Premium",
     data: "premium",
     type: "premium",
-    toggled: false
+    toggled: true
   };
 
   const difficulties: Filter[] = ["Easy", "Medium", "Hard"].map((difficulty, id): Filter => {
@@ -16,7 +20,7 @@ const FilterBar: FC<PropsWithChildren> = () => {
       id,
       text: difficulty,
       data: id.toString(),
-      type: "difficulties",
+      type: "difficulty",
       toggled: false
     }
   });
@@ -26,7 +30,7 @@ const FilterBar: FC<PropsWithChildren> = () => {
       styles="toggle toggle-white-outline"
       filter={premium}
       toggled={premium.toggled}
-      onClick={() => filterToggleHandler(premium)}
+      onClick={() => filterToggleHandler(updateFilters, premium)}
     >
       {premium.text}
     </FilterToggle>
@@ -38,7 +42,7 @@ const FilterBar: FC<PropsWithChildren> = () => {
         styles="toggle toggle-white-outline"
         filter={difficulty}
         toggled={difficulty.toggled}
-        onClick={() => filterToggleHandler(difficulty)}
+        onClick={() => filterToggleHandler(updateFilters, difficulty)}
       >
         {difficulty.text}
       </FilterToggle>
