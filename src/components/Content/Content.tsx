@@ -11,14 +11,13 @@ type contentProps = {
 
 type contentState = {
 	tags: Set<string>;
-	premium: boolean;
+	premium?: boolean;
 	difficulty: Set<number>;
 }
 
 class Content extends Component<contentProps, contentState> {
 	state: contentState = {
 		tags: new Set(),
-		premium: true,
 		difficulty: new Set()
 	};
 
@@ -66,8 +65,6 @@ class Content extends Component<contentProps, contentState> {
 				this.updateDifficulty(parseInt(filter.data));
 				break;
 		}
-
-		console.log(this.state);
 	}
 
 	render() {

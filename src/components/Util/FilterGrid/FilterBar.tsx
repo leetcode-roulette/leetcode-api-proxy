@@ -12,7 +12,7 @@ const FilterBar: FC<FilterBarProps> = ({ updateFilters }: FilterBarProps) => {
     text: "Premium",
     data: "premium",
     type: "premium",
-    toggled: true
+    toggled: false
   };
 
   const difficulties: Filter[] = ["Easy", "Medium", "Hard"].map((difficulty, id): Filter => {
