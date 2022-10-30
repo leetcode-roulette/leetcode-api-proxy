@@ -6,9 +6,11 @@
 	padding: 0;
 }
 
-:root,
+#root,
 html,
-body {
+body,
+#app,
+#app>div {
 	position: absolute;
 	height: 100%;
 	width: 100%;

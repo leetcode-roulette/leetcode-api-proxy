@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import { Content } from "./components/Content";
 import { Header } from "./components/Header";
+import { LoadingScreen } from "./components/LoadingScreen";
 import { Filter, getTags } from "./components/Util/FilterGrid/Filter";
 
 type AppState = {
@@ -27,7 +28,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Header />
-				{ this.state.tagsRetrieved ? <Content tags={this.state.tags}></Content> : <></>}
+				{ this.state.tagsRetrieved ? <Content tags={this.state.tags}></Content> : <LoadingScreen/>}
 			</div>
 		);
 	}
