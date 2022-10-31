@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import { MDBSpinner } from 'mdb-react-ui-kit';
+import { MDBSpinner } from "mdb-react-ui-kit";
 
 const LoadingScreen: FC<PropsWithChildren> = () => {
   return (
