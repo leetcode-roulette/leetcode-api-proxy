@@ -12,3 +12,7 @@ body {
 .logo span {
 	color: var(--dark-orange-color);
 }
+
+.text-white {
+	color: var(--white-color) !important;
+}
