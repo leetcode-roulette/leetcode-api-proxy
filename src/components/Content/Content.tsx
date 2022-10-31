@@ -1,5 +1,5 @@
 import { Problem } from "leetcode-roulette-api";
-import React, { Component } from "react";
+import { Component } from "react";
 import { api } from "../../api";
 import { Button } from "../Util";
 import { FilterGrid } from "../Util/FilterGrid";
@@ -9,18 +9,18 @@ import "./styles/content.css";
 
 type contentProps = {
 	tags: Array<Filter>;
-}
+};
 
 type contentState = {
 	tags: Set<string>;
 	premium?: boolean;
 	difficulty: Set<number>;
-}
+};
 
 class Content extends Component<contentProps, contentState> {
 	state: contentState = {
 		tags: new Set(),
-		difficulty: new Set()
+		difficulty: new Set(),
 	};
 
 	constructor(props: contentProps) {
@@ -42,9 +42,9 @@ class Content extends Component<contentProps, contentState> {
 	}
 
 	updatePremiumState(isPremium: boolean): void {
-		this.setState(state => ({
+		this.setState((state) => ({
 			...state,
-			premium: isPremium
+			premium: isPremium,
 		}));
 	}
 
@@ -77,11 +77,11 @@ class Content extends Component<contentProps, contentState> {
 			problems = await api.getProblems({
 				tags: Array.from(this.state.tags),
 				difficulty: Array.from(this.state.difficulty),
-				premium: this.state.premium !== undefined ? !this.state.premium : false
+				premium: this.state.premium !== undefined ? !this.state.premium : false,
 			});
 
 			console.log(problems);
-		} catch(e) {
+		} catch (e) {
 			console.log("Error fetching problems: " + e);
 		}
 	}
@@ -96,15 +96,20 @@ class Content extends Component<contentProps, contentState> {
 						</h5>
 						<div className="row justify-content-center">
 							<p className="w-75 pb-1">
-								Leetcode Roulette is a service that allows users to get a random question from <a rel="noreferrer" target="_blank" className="leetcode" href="https://leetcode.com">leetcode.com</a>, 
-								similar to a roulette game. Users are able to apply filters and 
-								search to find questions. Try it out below!
+								Leetcode Roulette is a service that allows users to get a random question from{" "}
+								<a rel="noreferrer" target="_blank" className="leetcode" href="https://leetcode.com">
+									leetcode.com
+								</a>
+								, similar to a roulette game. Users are able to apply filters and search to find questions. Try it
+								out below!
 							</p>
 						</div>
 						<FilterBar updateFilters={this.updateFilters}></FilterBar>
 						<FilterGrid tags={this.props.tags} updateFilters={this.updateFilters}></FilterGrid>
 						<div className="my-5">
-							<Button onClick={this.onClick} size="btn-lrg" styles="btn-primary-solid">Random</Button>
+							<Button onClick={this.onClick} size="btn-lrg" styles="btn-primary-solid">
+								Random
+							</Button>
 						</div>
 					</div>
 				</div>
