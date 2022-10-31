@@ -18,6 +18,11 @@ class App extends Component<{}, AppState> {
 	async componentDidMount() {
 		document.title = "Welcome to Leetcode Roulette | Apply Filters & Get Started Finding Problems!";
 		const tags = await getTags();
+		await new Promise<void>((resolve) => {
+			setTimeout(() => {
+				resolve();
+			}, 2000);
+		});
 		this.setState({
 			...this.state,
 			tags,
@@ -29,7 +34,7 @@ class App extends Component<{}, AppState> {
 		return (
 			<div className="App">
 				<Header />
-				{this.state.tagsRetrieved ? <Content tags={this.state.tags}></Content> : <LoadingScreen />}
+				<Content tags={this.state.tags}></Content>
 			</div>
 		);
 	}

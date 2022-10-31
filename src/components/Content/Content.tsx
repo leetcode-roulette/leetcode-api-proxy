@@ -4,6 +4,7 @@ import { api } from "../../api";
 import { Button } from "../Util";
 import { FilterGrid } from "../Util/FilterGrid";
 import { Filter } from "../Util/FilterGrid/Filter";
+import { LoadingScreen } from "../LoadingScreen";
 import FilterBar from "../Util/FilterGrid/FilterBar";
 import "./styles/content.css";
 
@@ -104,13 +105,19 @@ class Content extends Component<contentProps, contentState> {
 								out below!
 							</p>
 						</div>
-						<FilterBar updateFilters={this.updateFilters}></FilterBar>
-						<FilterGrid tags={this.props.tags} updateFilters={this.updateFilters}></FilterGrid>
-						<div className="my-5">
-							<Button onClick={this.onClick} size="btn-lrg" styles="btn-primary-solid">
-								Random
-							</Button>
-						</div>
+						{this.props.tags.length > 1 ? (
+							<>
+								<FilterBar updateFilters={this.updateFilters}></FilterBar>
+								<FilterGrid tags={this.props.tags} updateFilters={this.updateFilters}></FilterGrid>
+								<div className="my-5">
+									<Button onClick={this.onClick} size="btn-lrg" styles="btn-primary-solid">
+										Random
+									</Button>
+								</div>
+							</>
+						) : (
+							<LoadingScreen />
+						)}
 					</div>
 				</div>
 			</div>
