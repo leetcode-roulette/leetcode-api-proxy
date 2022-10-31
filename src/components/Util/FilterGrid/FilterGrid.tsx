@@ -45,7 +45,6 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 						</button>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	)
