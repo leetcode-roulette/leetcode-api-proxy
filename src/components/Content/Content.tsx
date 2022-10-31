@@ -1,6 +1,7 @@
 import { Problem } from "leetcode-roulette-api";
 import React, { Component } from "react";
 import { api } from "../../api";
+import { LoadingScreen } from "../LoadingScreen";
 import { Button } from "../Util";
 import { FilterGrid } from "../Util/FilterGrid";
 import { Filter } from "../Util/FilterGrid/Filter";
@@ -33,12 +34,23 @@ class Content extends Component<contentProps, contentState> {
 		this.onClick = this.onClick.bind(this);
 	}
 
-	updateTags(slug: string): void {
-		if (this.state.tags.has(slug)) {
-			this.state.tags.delete(slug);
+	getNewSet<T>(oldSet: Set<T>, val: T): Set<T> {
+		const newSet: Set<T> = new Set(oldSet);
+
+		if (newSet.has(val)) {
+			newSet.delete(val);
 		} else {
-			this.state.tags.add(slug);
+			newSet.add(val);
 		}
+
+		return newSet;
+	}
+
+	updateTags(slug: string): void {
+		this.setState(state => ({
+			...state,
+			tags: this.getNewSet(state.tags, slug)
+		}));
 	}
 
 	updatePremiumState(isPremium: boolean): void {
@@ -49,11 +61,10 @@ class Content extends Component<contentProps, contentState> {
 	}
 
 	updateDifficulty(difficulty: number): void {
-		if (this.state.difficulty.has(difficulty)) {
-			this.state.difficulty.delete(difficulty);
-		} else {
-			this.state.difficulty.add(difficulty);
-		}
+		this.setState(state => ({
+			...state,
+			difficulty: this.getNewSet(state.difficulty, difficulty)
+		}));
 	}
 
 	updateFilters(filter: Filter): void {
@@ -87,10 +98,20 @@ class Content extends Component<contentProps, contentState> {
 	}
 
 	render() {
+		const Filters = (
+			<>
+				<FilterBar updateFilters={this.updateFilters}></FilterBar>
+				<FilterGrid tags={this.props.tags} updateFilters={this.updateFilters}></FilterGrid>
+				<div className="my-5">
+					<Button onClick={this.onClick} size="btn-lrg" styles="btn-primary-solid">Random</Button>
+				</div>
+			</>
+		)
+
 		return (
 			<div className="content px-4">
-				<div className="mx-auto pt-2 text-center">
-					<div className="col align-self-center">
+				<div className="h-100 mx-auto pt-2 text-center">
+					<div className="col h-100 align-self-center">
 						<h5 className="logo py-2 fw-normal">
 							Welcome to LeetCode<span>Roulette</span>
 						</h5>
@@ -101,11 +122,11 @@ class Content extends Component<contentProps, contentState> {
 								search to find questions. Try it out below!
 							</p>
 						</div>
-						<FilterBar updateFilters={this.updateFilters}></FilterBar>
-						<FilterGrid tags={this.props.tags} updateFilters={this.updateFilters}></FilterGrid>
-						<div className="my-5">
-							<Button onClick={this.onClick} size="btn-lrg" styles="btn-primary-solid">Random</Button>
-						</div>
+						{ this.props.tags.length > 0 ? 
+							Filters
+								:
+							<LoadingScreen />
+						}
 					</div>
 				</div>
 			</div>
