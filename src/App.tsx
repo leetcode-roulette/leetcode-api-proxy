@@ -1,33 +1,32 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import "./App.css";
 import { Content } from "./components/Content";
 import { Header } from "./components/Header";
 import { Filter, getTags } from "./components/Util/FilterGrid/Filter";
 
+type AppProps = {}
+
 type AppState = {
 	tags: Array<Filter>;
-	tagsRetrieved?: boolean;
 }
 
-class App extends Component {
+class App extends Component<AppProps, AppState> {
 	state: AppState = {
 		tags: []
-	};
+	}
 
 	async componentDidMount() {
 		document.title = "Welcome to Leetcode Roulette | Apply Filters & Get Started Finding Problems!";
-		this.state.tags = await getTags();
-		this.setState(state => ({
-			...state,
-			tagsRetrieved: true
-		}));
+		this.setState({
+			tags: await getTags()
+		});
 	}
 
 	render() {
 		return (
 			<div className="App">
 				<Header />
-				{ this.state.tagsRetrieved ? <Content tags={this.state.tags}></Content> : <></>}
+				<Content tags={this.state.tags || []}></Content>
 			</div>
 		);
 	}
