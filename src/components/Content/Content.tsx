@@ -1,6 +1,4 @@
-import { Problem } from "leetcode-roulette-api";
-import { Component } from "react";
-import { api } from "../../api";
+import { FC, useState } from "react";
 import { LoadingScreen } from "../LoadingScreen";
 import { Button } from "../Util";
 import { FilterGrid } from "../Util/FilterGrid";
@@ -12,29 +10,12 @@ type contentProps = {
 	tags: Array<Filter>;
 };
 
-type contentState = {
-	tags: Set<string>;
-	premium?: boolean;
-	difficulty: Set<number>;
-};
+const Content: FC<contentProps> = (props: contentProps) => {
+	const [tags, setTags] = useState<Set<string>>(new Set());
+	const [difficulty, setDifficulty] = useState<Set<number>>(new Set());
+	const [premium, setPremium] = useState<boolean>(false);
 
-class Content extends Component<contentProps, contentState> {
-	state: contentState = {
-		tags: new Set(),
-		difficulty: new Set(),
-	};
-
-	constructor(props: contentProps) {
-		super(props);
-
-		this.updateFilters = this.updateFilters.bind(this);
-		this.updateTags = this.updateTags.bind(this);
-		this.updatePremiumState = this.updatePremiumState.bind(this);
-		this.updateDifficulty = this.updateDifficulty.bind(this);
-		this.onClick = this.onClick.bind(this);
-	}
-
-	getNewSet<T>(oldSet: Set<T>, val: T): Set<T> {
+	function getNewSet<T>(oldSet: Set<T>, val: T): Set<T> {
 		const newSet: Set<T> = new Set(oldSet);
 
 		if (newSet.has(val)) {
@@ -46,95 +27,64 @@ class Content extends Component<contentProps, contentState> {
 		return newSet;
 	}
 
-	updateTags(slug: string): void {
-		this.setState(state => ({
-			...state,
-			tags: this.getNewSet(state.tags, slug)
-		}));
-	}
-
-	updatePremiumState(isPremium: boolean): void {
-		this.setState(state => ({
-			...state,
-			premium: isPremium
-		}));
-	}
-
-	updateDifficulty(difficulty: number): void {
-		this.setState(state => ({
-			...state,
-			difficulty: this.getNewSet(state.difficulty, difficulty)
-		}));
-	}
-
-	updateFilters(filter: Filter): void {
+	function updateFilters(filter: Filter): void {
 		switch (filter.type) {
 			case "tags":
-				this.updateTags(filter.data);
+				setTags(getNewSet(tags, filter.data));
 				break;
 			case "premium":
-				this.updatePremiumState(filter.toggled);
+				setPremium(!premium);
 				break;
 			case "difficulty":
-				this.updateDifficulty(parseInt(filter.data));
+				setDifficulty(getNewSet(difficulty, parseInt(filter.data)));
 				break;
 		}
 	}
 
-	async onClick(): Promise<void> {
-		let problems: Array<Problem>;
-
-		try {
-			problems = await api.getProblems({
-				tags: Array.from(this.state.tags),
-				difficulty: Array.from(this.state.difficulty),
-				premium: this.state.premium !== undefined ? !this.state.premium : false,
-			});
-
-			console.log(problems);
-		} catch (e) {
-			console.log("Error fetching problems: " + e);
-		}
+	function onClick(): void {
+		console.log({
+			difficulty,
+			tags,
+			premium
+		});
 	}
 
-	render() {
-		const Filters = (
-			<>
-				<FilterBar updateFilters={this.updateFilters}></FilterBar>
-				<FilterGrid tags={this.props.tags} updateFilters={this.updateFilters}></FilterGrid>
-				<div className="my-5">
-					<Button onClick={this.onClick} size="btn-lrg" styles="btn-primary-solid">Random</Button>
-				</div>
-			</>
-		)
+	const Filters = (
+		<>
+			<FilterBar updateFilters={updateFilters}></FilterBar>
+			<FilterGrid tags={props.tags} updateFilters={updateFilters}></FilterGrid>
+			<div className="my-5">
+				<Button onClick={onClick} size="btn-lrg" styles="btn-primary-solid">Random</Button>
+			</div>
+		</>
+	);
 
-		return (
-			<div className="content px-4">
-				<div className="h-100 mx-auto pt-2 text-center">
-					<div className="col h-100 align-self-center">
-						<h5 className="logo py-2 fw-normal">
-							Welcome to LeetCode<span>Roulette</span>
-						</h5>
-						<div className="row justify-content-center">
-							<p className="w-75 pb-1">
-								Leetcode Roulette is a service that allows users to get a random question from{" "}
-								<a rel="noreferrer" target="_blank" className="leetcode" href="https://leetcode.com">
-									leetcode.com
-								</a>
-								, similar to a roulette game. Users are able to apply filters and search to find questions. Try it
-								out below!
-							</p>
-						</div>
-						{ this.props.tags.length > 0 ? 
-							Filters
-								:
-							<LoadingScreen />
-						}
+	return (
+		<div className="content px-4">
+			<div className="h-100 mx-auto pt-2 text-center">
+				<div className="col h-100 align-self-center">
+					<h5 className="logo py-2 fw-normal">
+						Welcome to LeetCode<span>Roulette</span>
+					</h5>
+					<div className="row justify-content-center">
+						<p className="w-75 pb-1">
+							Leetcode Roulette is a service that allows users to get a random question from{" "}
+							<a rel="noreferrer" target="_blank" className="leetcode" href="https://leetcode.com">
+								leetcode.com
+							</a>
+							, similar to a roulette game. Users are able to apply filters and search to find questions. Try it
+							out below!
+						</p>
 					</div>
+					{ props.tags.length > 0 ? 
+						Filters
+							:
+						<LoadingScreen />
+					}
 				</div>
 			</div>
-		);
-	}
+		</div>
+	)
 }
 
 export default Content;
