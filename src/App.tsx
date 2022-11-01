@@ -6,7 +6,6 @@ import { Filter, getTags } from "./components/Util/FilterGrid/Filter";
 
 const App: FC<PropsWithChildren> = () => {
 	const [tags, setTags] = useState<Array<Filter>>();
-
 	document.title = "Welcome to Leetcode Roulette | Apply Filters & Get Started Finding Problems!";
 	useEffect(() => {
 		const fetchData = async () => setTags(await getTags());
