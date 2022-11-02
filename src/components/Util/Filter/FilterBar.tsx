@@ -1,12 +1,10 @@
 import React, { FC } from "react";
-import { Filter, filterToggleHandler } from "./Filter";
-import FilterToggle from "./FilterToggle";
+import { Filter, FilterToggle, filterToggleHandler } from ".";
+import { useFilterContext } from "../../../context/FilterProvider";
 
-interface FilterBarProps {
-	updateFilters: (filter: Filter) => void;
-}
+const FilterBar: FC = () => {
+	const [, setFilters] = useFilterContext();
 
-const FilterBar: FC<FilterBarProps> = ({ updateFilters }: FilterBarProps) => {
 	const premium: Filter = {
 		id: 1,
 		text: "Premium",
@@ -30,7 +28,7 @@ const FilterBar: FC<FilterBarProps> = ({ updateFilters }: FilterBarProps) => {
 			styles="toggle toggle-white-outline"
 			filter={premium}
 			toggled={premium.toggled}
-			onClick={() => filterToggleHandler(updateFilters, premium)}
+			onClick={() => filterToggleHandler(setFilters, premium)}
 		>
 			{premium.text}
 		</FilterToggle>
@@ -42,7 +40,7 @@ const FilterBar: FC<FilterBarProps> = ({ updateFilters }: FilterBarProps) => {
 				styles="toggle toggle-white-outline"
 				filter={difficulty}
 				toggled={difficulty.toggled}
-				onClick={() => filterToggleHandler(updateFilters, difficulty)}
+				onClick={() => filterToggleHandler(setFilters, difficulty)}
 			>
 				{difficulty.text}
 			</FilterToggle>
@@ -52,13 +50,13 @@ const FilterBar: FC<FilterBarProps> = ({ updateFilters }: FilterBarProps) => {
 	return (
 		<div className="container-fluid pt-3">
 			<div className="col">
-				<div className="d-flex flex-wrap justify-content-center">
+				<div className="d-flex flex-wrap justify-content-center mb-2">
 					{Difficulties.map((Difficulty, i) => (
-						<div key={i} className="mx-2 mb-2">
+						<div key={i} className="mx-2">
 							{Difficulty}
 						</div>
 					))}
-					<div className="mx-2 mb-2">{Premium}</div>
+					<div className="mx-2">{Premium}</div>
 				</div>
 			</div>
 		</div>

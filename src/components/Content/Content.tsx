@@ -1,59 +1,23 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { LoadingScreen } from "../LoadingScreen";
 import { Button } from "../Util";
-import { FilterGrid } from "../Util/FilterGrid";
-import { Filter } from "../Util/FilterGrid/Filter";
-import FilterBar from "../Util/FilterGrid/FilterBar";
+import { TagGrid, FilterBar } from "../Util/Filter";
 import { useModalContext } from "../../context/ModalProvider";
 import "./styles/content.css";
-import { useTagsContext } from "../../context/AppProvider";
+import { useTagsContext } from "../../context/TagProvider";
 
 const Content: FC = () => {
-	const [_tags, _setTags] = useTagsContext();
-	const [tags, setTags] = useState<Set<string>>(new Set());
-	const [difficulty, setDifficulty] = useState<Set<number>>(new Set());
-	const [premium, setPremium] = useState<boolean>(false);
-	const [openModal, toggleModalOpen] = useModalContext();
-
-	function getNewSet<T>(oldSet: Set<T>, val: T): Set<T> {
-		const newSet: Set<T> = new Set(oldSet);
-
-		if (newSet.has(val)) {
-			newSet.delete(val);
-		} else {
-			newSet.add(val);
-		}
-
-		return newSet;
-	}
-
-	function updateFilters(filter: Filter): void {
-		switch (filter.type) {
-			case "tags":
-				setTags(getNewSet(tags, filter.data));
-				break;
-			case "premium":
-				setPremium(!premium);
-				break;
-			case "difficulty":
-				setDifficulty(getNewSet(difficulty, parseInt(filter.data)));
-				break;
-		}
-	}
+	const [tags] = useTagsContext();
+	const [, toggleModalOpen] = useModalContext();
 
 	function onClick(): void {
 		toggleModalOpen();
-		console.log({
-			difficulty,
-			tags,
-			premium,
-		});
 	}
 
 	const Filters = (
 		<>
-			<FilterBar updateFilters={updateFilters}></FilterBar>
-			<FilterGrid tags={_tags} updateFilters={updateFilters}></FilterGrid>
+			<FilterBar></FilterBar>
+			<TagGrid></TagGrid>
 			<div className="my-5">
 				<Button onClick={onClick} size="btn-lrg" styles="btn-primary-solid">
 					Random
@@ -79,7 +43,7 @@ const Content: FC = () => {
 							below!
 						</p>
 					</div>
-					{_tags.length > 0 ? Filters : <LoadingScreen />}
+					{tags.length > 0 ? Filters : <LoadingScreen />}
 				</div>
 			</div>
 		</div>

@@ -1,14 +1,13 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
 import throttle from "lodash.throttle";
-import FilterToggle from "./FilterToggle";
-import { Filter, filterToggleHandler } from "./Filter";
+import { FilterToggle, Filter, filterToggleHandler } from ".";
+import { useTagsContext } from "../../../context/TagProvider";
+import { useFilterContext } from "../../../context/FilterProvider";
 
-type FilterGridProps = {
-	updateFilters: (filter: Filter) => void;
-	tags: Array<Filter>;
-}
+const TagGrid: FC = () => {
+	const [tags] = useTagsContext();
+	const [, setFilters] = useFilterContext();
 
-const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProps) => {
 	const getFiltersByBreakpoint = useCallback((brkPnt: string): number => {
 		switch(brkPnt) {
 			case "xs":
@@ -42,7 +41,7 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 			styles="toggle toggle-white-outline"
 			filter={filter}
 			toggled={filter.toggled}
-			onClick={() => filterToggleHandler(updateFilters, filter)}
+			onClick={() => filterToggleHandler(setFilters, filter)}
 		>
 			{filter.text}
 		</FilterToggle>
@@ -84,4 +83,4 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 	)
 }
 
-export default FilterGrid;
+export default TagGrid;
