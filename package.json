@@ -14,7 +14,7 @@
 		"@types/react-dom": "^18.0.6",
 		"bootstrap": "^5.2.2",
 		"express": "^4.18.1",
-		"leetcode-roulette-api": "^0.2.0",
+		"leetcode-roulette-api": "^0.2.1",
 		"lodash.throttle": "^4.1.1",
 		"mdb-react-ui-kit": "^4.2.0",
 		"react": "^18.2.0",
