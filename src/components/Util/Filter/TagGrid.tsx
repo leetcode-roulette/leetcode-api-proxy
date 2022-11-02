@@ -1,13 +1,12 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
-import throttle from "lodash.throttle";
 import { FilterToggle, Filter, filterToggleHandler } from ".";
-import { useTagsContext } from "../../../context/TagProvider";
-import { useFilterContext } from "../../../context/FilterProvider";
+import { useTagsContext, useFilterContext, useBreakpointContext } from "../../../context";
 
 const TagGrid: FC = () => {
+
 	const [tags] = useTagsContext();
 	const [, setFilters] = useFilterContext();
-
+	const [brkPnt] = useBreakpointContext();
 	const getFiltersByBreakpoint = useCallback((brkPnt: string): number => {
 		switch(brkPnt) {
 			case "xs":
@@ -20,19 +19,6 @@ const TagGrid: FC = () => {
 				return tags.length;
 		}
 	}, [tags.length]);
-
-	const getDeviceConfig = (width: number): string => {
-		if(width < 720) {
-			return 'xs'
-		} else if(width >= 720 && width < 1024 ) {
-			return 'sm'
-		} else if(width >= 1024 && width < 1400) {
-			return 'md'
-		} else {
-			return 'lg'
-		}
-	}
-	const [brkPnt, setBrkPnt] = useState<string>(() =>  getDeviceConfig(window.innerWidth));
 	const [defaultNumberOfFilters, setDefaultNumberOfFilters] = useState<number>(getFiltersByBreakpoint(brkPnt));
 	const [showMore, setShowMore] = useState<Boolean>(false);
 	const [numberOfFilters, setNumberOfFilters] = useState<number>(defaultNumberOfFilters);
@@ -47,12 +33,6 @@ const TagGrid: FC = () => {
 		</FilterToggle>
 	));
 	const onClick: () => void = () => setShowMore(!showMore);
-
-	useEffect(() => {
-		window.addEventListener('resize', throttle(function() {
-		setBrkPnt(getDeviceConfig(window.innerWidth));
-		}, 200))
-	});
 
 	useEffect(() => {
 		setDefaultNumberOfFilters(getFiltersByBreakpoint(brkPnt));

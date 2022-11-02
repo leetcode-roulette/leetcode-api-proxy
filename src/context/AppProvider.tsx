@@ -1,7 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import TagProvider from "./TagProvider";
-import ModalProvider from "./ModalProvider";
-import FilterProvider from "./FilterProvider";
+import { TagProvider, ModalProvider, FilterProvider, BreakpointProvider } from ".";
 
 
 const AppProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -10,7 +8,9 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 			<TagProvider>
 				<ModalProvider>
 					<FilterProvider>
-						{ children }
+						<BreakpointProvider>
+							{ children }
+						</BreakpointProvider>
 					</FilterProvider>
 				</ModalProvider>
 			</TagProvider>
