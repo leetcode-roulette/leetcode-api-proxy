@@ -1,18 +1,14 @@
 import { FC } from "react";
 import Modal from "react-bootstrap/Modal";
-import { useModal, useToggleModalOpen } from "../../context/ModalProvider";
+import { useModalContext } from "../../context/ModalProvider";
 
 import "./styles/problem-modal.css";
 
 const ProblemModal: FC = () => {
-	const open = useModal();
-	const toggleModalOpen = useToggleModalOpen();
-
-	const handleClose = () => toggleModalOpen();
-
+	const [open, toggleModalOpen] = useModalContext();
 	return (
 		<>
-			<Modal show={open} onHide={handleClose}>
+			<Modal show={open} onHide={() => toggleModalOpen()}>
 				<Modal.Header closeButton>
 					<Modal.Title>Modal heading</Modal.Title>
 				</Modal.Header>

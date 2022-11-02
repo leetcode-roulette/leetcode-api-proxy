@@ -4,18 +4,16 @@ import { Button } from "../Util";
 import { FilterGrid } from "../Util/FilterGrid";
 import { Filter } from "../Util/FilterGrid/Filter";
 import FilterBar from "../Util/FilterGrid/FilterBar";
-import { useToggleModalOpen } from "../../context/ModalProvider";
+import { useModalContext } from "../../context/ModalProvider";
 import "./styles/content.css";
+import { useTagsContext } from "../../context/AppProvider";
 
-type contentProps = {
-	tags: Array<Filter>;
-};
-
-const Content: FC<contentProps> = (props: contentProps) => {
+const Content: FC = () => {
+	const [_tags, _setTags] = useTagsContext();
 	const [tags, setTags] = useState<Set<string>>(new Set());
 	const [difficulty, setDifficulty] = useState<Set<number>>(new Set());
 	const [premium, setPremium] = useState<boolean>(false);
-	const toggleModalOpen = useToggleModalOpen();
+	const [openModal, toggleModalOpen] = useModalContext();
 
 	function getNewSet<T>(oldSet: Set<T>, val: T): Set<T> {
 		const newSet: Set<T> = new Set(oldSet);
@@ -55,7 +53,7 @@ const Content: FC<contentProps> = (props: contentProps) => {
 	const Filters = (
 		<>
 			<FilterBar updateFilters={updateFilters}></FilterBar>
-			<FilterGrid tags={props.tags} updateFilters={updateFilters}></FilterGrid>
+			<FilterGrid tags={_tags} updateFilters={updateFilters}></FilterGrid>
 			<div className="my-5">
 				<Button onClick={onClick} size="btn-lrg" styles="btn-primary-solid">
 					Random
@@ -81,7 +79,7 @@ const Content: FC<contentProps> = (props: contentProps) => {
 							below!
 						</p>
 					</div>
-					{props.tags.length > 0 ? Filters : <LoadingScreen />}
+					{_tags.length > 0 ? Filters : <LoadingScreen />}
 				</div>
 			</div>
 		</div>

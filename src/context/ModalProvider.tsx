@@ -1,12 +1,12 @@
 import { FC, PropsWithChildren, createContext, useContext, useState } from "react";
+
 const ModalContext = createContext(false);
 const ModalOpenContext = createContext<Function>(() => {});
 
-export const useModal = () => {
-	return useContext(ModalContext);
-};
-export const useToggleModalOpen = () => {
-	return useContext(ModalOpenContext);
+export const useModalContext = (): [boolean, Function] => {
+	const state = useContext(ModalContext);
+	const dispatch = useContext(ModalOpenContext);
+	return [state, dispatch];
 };
 
 const ModalProvider: FC<PropsWithChildren> = ({ children }) => {
