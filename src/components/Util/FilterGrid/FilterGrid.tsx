@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import throttle from "lodash.throttle";
 import FilterToggle from "./FilterToggle";
 import { Filter, filterToggleHandler } from "./Filter";
@@ -9,25 +9,25 @@ type FilterGridProps = {
 }
 
 const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProps) => {
-	const getFiltersByBreakpoint = (brkPnt: string): number => {
+	const getFiltersByBreakpoint = useCallback((brkPnt: string): number => {
 		switch(brkPnt) {
 			case "xs":
-				return 4;
-			case "sm":
 				return 9;
-			case "md":
+			case "sm":
 				return 18;
+			case "md":
+				return 30;
 			default:
-				return 39;
+				return tags.length;
 		}
-	}
+	}, [tags.length]);
 
 	const getDeviceConfig = (width: number): string => {
-		if(width < 320) {
+		if(width < 720) {
 			return 'xs'
-		} else if(width >= 320 && width < 720 ) {
+		} else if(width >= 720 && width < 1024 ) {
 			return 'sm'
-		} else if(width >= 720 && width < 1024) {
+		} else if(width >= 1024 && width < 1400) {
 			return 'md'
 		} else {
 			return 'lg'
@@ -57,7 +57,7 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 
 	useEffect(() => {
 		setDefaultNumberOfFilters(getFiltersByBreakpoint(brkPnt));
-	}, [brkPnt]);
+	}, [brkPnt, getFiltersByBreakpoint]);
 
 	useEffect(() => {
 		setNumberOfFilters(showMore ? FILTER_BUTTONS.length : defaultNumberOfFilters);
@@ -76,9 +76,9 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 							)
 					)}
 				</div>
-				<button className="text-white btn mt-3" onClick={onClick}>
+				{ brkPnt === 'lg' || <button className="text-white btn mt-3" onClick={onClick}>
 					Show {showMore ? "less" : "more"}
-				</button>
+				</button> }
 			</div>
 		</div>
 	)
