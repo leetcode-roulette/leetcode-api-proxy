@@ -4,6 +4,7 @@ import { Content } from "./components/Content";
 import { Header } from "./components/Header";
 import { ProblemModal } from "./components/ProblemModal";
 import { Filter, getTags } from "./components/Util/FilterGrid/Filter";
+import ModalProvider from "./context/ModalProvider";
 
 const App: FC<PropsWithChildren> = () => {
 	const [tags, setTags] = useState<Array<Filter>>([]);
@@ -16,9 +17,11 @@ const App: FC<PropsWithChildren> = () => {
 
 	return (
 		<div className="App">
-			<Header />
-			<Content tags={tags}></Content>
-			<ProblemModal />
+			<ModalProvider>
+				<Header />
+				<Content tags={tags}></Content>
+				<ProblemModal />
+			</ModalProvider>
 		</div>
 	);
 };

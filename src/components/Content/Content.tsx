@@ -4,6 +4,7 @@ import { Button } from "../Util";
 import { FilterGrid } from "../Util/FilterGrid";
 import { Filter } from "../Util/FilterGrid/Filter";
 import FilterBar from "../Util/FilterGrid/FilterBar";
+import { useToggleModalOpen } from "../../context/ModalProvider";
 import "./styles/content.css";
 
 type contentProps = {
@@ -14,6 +15,7 @@ const Content: FC<contentProps> = (props: contentProps) => {
 	const [tags, setTags] = useState<Set<string>>(new Set());
 	const [difficulty, setDifficulty] = useState<Set<number>>(new Set());
 	const [premium, setPremium] = useState<boolean>(false);
+	const toggleModalOpen = useToggleModalOpen();
 
 	function getNewSet<T>(oldSet: Set<T>, val: T): Set<T> {
 		const newSet: Set<T> = new Set(oldSet);
@@ -42,10 +44,11 @@ const Content: FC<contentProps> = (props: contentProps) => {
 	}
 
 	function onClick(): void {
+		toggleModalOpen();
 		console.log({
 			difficulty,
 			tags,
-			premium
+			premium,
 		});
 	}
 
@@ -54,7 +57,9 @@ const Content: FC<contentProps> = (props: contentProps) => {
 			<FilterBar updateFilters={updateFilters}></FilterBar>
 			<FilterGrid tags={props.tags} updateFilters={updateFilters}></FilterGrid>
 			<div className="my-5">
-				<Button onClick={onClick} size="btn-lrg" styles="btn-primary-solid">Random</Button>
+				<Button onClick={onClick} size="btn-lrg" styles="btn-primary-solid">
+					Random
+				</Button>
 			</div>
 		</>
 	);
@@ -72,19 +77,15 @@ const Content: FC<contentProps> = (props: contentProps) => {
 							<a rel="noreferrer" target="_blank" className="leetcode" href="https://leetcode.com">
 								leetcode.com
 							</a>
-							, similar to a roulette game. Users are able to apply filters and search to find questions. Try it
-							out below!
+							, similar to a roulette game. Users are able to apply filters and search to find questions. Try it out
+							below!
 						</p>
 					</div>
-					{ props.tags.length > 0 ? 
-						Filters
-							:
-						<LoadingScreen />
-					}
+					{props.tags.length > 0 ? Filters : <LoadingScreen />}
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 export default Content;
