@@ -1,5 +1,5 @@
-import React, { FC, PropsWithChildren, useEffect, useState } from "react";
-import { Filter } from "./Filter";
+import React, { FC, PropsWithChildren, useState } from "react";
+import { Filter } from ".";
 
 import "./styles/filter-toggle.css";
 
@@ -14,10 +14,6 @@ interface FilterToggleProps extends PropsWithChildren {
 
 const FilterToggle: FC<FilterToggleProps> = ({ filter, children, onClick, styles }: FilterToggleProps) => {
 	const [toggled, setToggled] = useState(filter.toggled);
-
-	useEffect(() => {
-		console.log(toggled);
-	}, [toggled]);
 
 	function handleFilterToggle(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();

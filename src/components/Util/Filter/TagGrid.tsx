@@ -1,14 +1,12 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
-import throttle from "lodash.throttle";
-import FilterToggle from "./FilterToggle";
-import { Filter, filterToggleHandler } from "./Filter";
+import { FilterToggle, Filter, filterToggleHandler } from ".";
+import { useTagsContext, useFilterContext, useBreakpointContext } from "../../../context";
 
-type FilterGridProps = {
-	updateFilters: (filter: Filter) => void;
-	tags: Array<Filter>;
-}
+const TagGrid: FC = () => {
 
-const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProps) => {
+	const [tags] = useTagsContext();
+	const [, setFilters] = useFilterContext();
+	const [brkPnt] = useBreakpointContext();
 	const getFiltersByBreakpoint = useCallback((brkPnt: string): number => {
 		switch(brkPnt) {
 			case "xs":
@@ -21,19 +19,6 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 				return tags.length;
 		}
 	}, [tags.length]);
-
-	const getDeviceConfig = (width: number): string => {
-		if(width < 720) {
-			return 'xs'
-		} else if(width >= 720 && width < 1024 ) {
-			return 'sm'
-		} else if(width >= 1024 && width < 1400) {
-			return 'md'
-		} else {
-			return 'lg'
-		}
-	}
-	const [brkPnt, setBrkPnt] = useState<string>(() =>  getDeviceConfig(window.innerWidth));
 	const [defaultNumberOfFilters, setDefaultNumberOfFilters] = useState<number>(getFiltersByBreakpoint(brkPnt));
 	const [showMore, setShowMore] = useState<Boolean>(false);
 	const [numberOfFilters, setNumberOfFilters] = useState<number>(defaultNumberOfFilters);
@@ -42,18 +27,12 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 			styles="toggle toggle-white-outline"
 			filter={filter}
 			toggled={filter.toggled}
-			onClick={() => filterToggleHandler(updateFilters, filter)}
+			onClick={() => filterToggleHandler(setFilters, filter)}
 		>
 			{filter.text}
 		</FilterToggle>
 	));
 	const onClick: () => void = () => setShowMore(!showMore);
-
-	useEffect(() => {
-		window.addEventListener('resize', throttle(function() {
-		setBrkPnt(getDeviceConfig(window.innerWidth));
-		}, 200))
-	});
 
 	useEffect(() => {
 		setDefaultNumberOfFilters(getFiltersByBreakpoint(brkPnt));
@@ -84,4 +63,4 @@ const FilterGrid: FC<FilterGridProps> = ({ updateFilters, tags }: FilterGridProp
 	)
 }
 
-export default FilterGrid;
+export default TagGrid;

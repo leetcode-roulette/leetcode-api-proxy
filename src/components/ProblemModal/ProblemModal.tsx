@@ -6,6 +6,7 @@ import "./styles/problem-modal.css";
 
 const ProblemModal: FC = () => {
 	const [open, toggleModalOpen] = useModalContext();
+
 	return (
 		<>
 			<Modal show={open} onHide={() => toggleModalOpen()}>
