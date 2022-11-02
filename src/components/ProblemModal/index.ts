@@ -1,3 +1,4 @@
 import ProblemModal from "./ProblemModal";
+import ProblemData from "./ProblemData";
 
-export { ProblemModal };
+export { ProblemModal, ProblemData };

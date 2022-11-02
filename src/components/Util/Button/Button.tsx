@@ -26,7 +26,7 @@ const Button: FC<ButtonOptions> = ({ children, onClick, size, styles, text, type
 	const STYLE = [btnSize, btnStyle];
 
 	return (
-		<button className={`btn ${STYLE.join(" ")}`} onClick={onClick} type={type}>
+		<button className={`button btn ${STYLE.join(" ")}`} onClick={onClick} type={type}>
 			{children}
 		</button>
 	);

@@ -1,15 +1,16 @@
 import { FC, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import Button from 'react-bootstrap/Button';
 import { useFilterContext, useModalContext } from "../../context";
 import { api, Problem } from "../../api";
 import Roulette from "@leetcoderoulette/roulette";
+import { ProblemData } from ".";
 
 import "./styles/problem-modal.css";
 
 const ProblemModal: FC = () => {
 	const [open, toggleModalOpen] = useModalContext();
 	const [filters] = useFilterContext();
-	const [problems, setProblems] = useState<Problem[]>([]);
 	const [currentProblem, setCurrentProblem] = useState<Problem>();
 
 	const [roulette, setRoulette] = useState<Roulette<Problem> | undefined>();
@@ -20,11 +21,10 @@ const ProblemModal: FC = () => {
 			const difficulty = Array.from(filters.difficulty);
 			const premium = filters.premium;
 			api.getProblems({ tags, difficulty, premium }).then((problems) => {
-				setProblems(problems);
 				setRoulette(new Roulette(problems));
 			});
 		}
-	}, [open]);
+	}, [open, filters.tags, filters.difficulty, filters.premium]);
 
 	useEffect(() => {
 		if (roulette && roulette.size !== 0) {
@@ -42,29 +42,17 @@ const ProblemModal: FC = () => {
 					<Modal.Title>{currentProblem?.title}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					{currentProblem && (
-						<>
-							<div
-								dangerouslySetInnerHTML={{
-									__html: currentProblem?.description || "<p>No Description</p>",
-								}}
-							></div>
-							{currentProblem?.hints.length && (
-								<div>
-									<p>
-										<strong>Hints:</strong>
-									</p>
-									<ul>
-										{currentProblem?.hints.map((hint) => {
-											return <li>{hint}</li>;
-										})}
-									</ul>
-								</div>
-							)}
-						</>
-					)}
+					{currentProblem && <>
+						<ProblemData problem={currentProblem} />
+					</> }
 				</Modal.Body>
-				<Modal.Footer>{problems.length}</Modal.Footer>
+				<Modal.Footer>
+					<Button variant="primary" rel="noreferrer" target="_blank" href={`https://leetcode.com/problems/${currentProblem?.title_slug}`}>Solve it</Button>
+					<Button onClick={() => {
+						setCurrentProblem(roulette?.problem);
+						setRoulette(roulette);
+					}} variant="danger">Reroll</Button>
+				</Modal.Footer>
 			</Modal>
 		</>
 	);
