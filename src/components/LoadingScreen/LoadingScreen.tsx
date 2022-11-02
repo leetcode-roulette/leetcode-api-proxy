@@ -3,7 +3,7 @@ import { MDBSpinner } from "mdb-react-ui-kit";
 
 const LoadingScreen: FC<PropsWithChildren> = () => {
   return (
-    <div className="row h-75 align-middle mx-auto">
+    <div className="row h-100">
       <MDBSpinner className="align-self-center mx-auto" color="light">
         <span className='visually-hidden'>Loading...</span>
       </MDBSpinner>
