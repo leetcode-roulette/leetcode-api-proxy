@@ -10,7 +10,7 @@ const ProblemData: FC<problemProps> = ({ problem }: problemProps) => {
     <>
       <div
         dangerouslySetInnerHTML={{
-          __html: problem?.description || "<p>No Description</p>",
+          __html: problem?.description || "<p>No description to show.</p>",
         }}
       />
       {problem?.hints.length ? (
